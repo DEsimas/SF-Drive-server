@@ -1,0 +1,78 @@
+type User {
+    _id: ID!
+    name: String!
+    birth: String!
+    email: String!
+    phone: String!
+    password: String!
+    license: License!
+    passport: Passport!
+}
+
+type License {
+    name: String!
+    date: String!
+}
+
+type Passport {
+    name: String!
+    date: String!
+    who: String!
+    code: String!
+}
+
+input CreateUserInput {
+    name: String!
+    birth: String!
+    email: String!
+    phone: String!
+    password: String!
+    license: LicenseInput!
+    passport: PassportInput!
+}
+
+input LicenseInput {
+    name: String!
+    date: String!
+}
+
+input PassportInput {
+    name: String!
+    date: String!
+    who: String!
+    code: String!
+}
+
+input UpdateUserInput {
+    name: String
+    birth: String
+    email: String
+    phone: String
+    password: String
+    license: UpdateLicenseInput
+    passport: UpdatePassportInput
+}
+
+input UpdateLicenseInput {
+    name: String
+    date: String
+}
+
+input UpdatePassportInput {
+    name: String
+    date: String
+    who: String
+    code: String
+}
+
+type Query {
+    findAllUsers: [User!]!
+    findOneUser(id: ID!): User
+    authentication(email: String!, password: String!): User!
+}
+
+type Mutation {
+    createUser(createUserInput: CreateUserInput!): User!
+    updateUser(id: ID!, updateUserInput: UpdateUserInput!): User!
+    deleteUser(id: ID!): User!
+}
